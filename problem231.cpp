@@ -1,4 +1,4 @@
-// Power of Two
+// Power of Two - this solution can be used for power of 3/4 also
 
 class Solution {
 public:
