@@ -8,8 +8,7 @@ int main() {
         //cout << let << "\n";
 
         int val = atoi(&let) - 1;
-        
-        
+    
 
     }
     
