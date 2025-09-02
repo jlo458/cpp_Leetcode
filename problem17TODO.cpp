@@ -1,26 +1,50 @@
 // Letter combinations
-// give me a sec
 
-void perms(string prev_letters, vector<string> group_letters_left, vector<string> &results) {
-    if (group_letters_left.empty()) results.push_back(prev_letters);
 
-    for (auto let : group_letters_left[0]) {
+class Solution {
+public:
+    vector<string> letterCombinations(string digits) {
+        if (digits == "") return vector<string> {};
+
+
+        vector<string> groups_letters;
+        
+        vector<string> lets_in_nums = {"abc","def","ghi","jkl","mno","pqrs","tuv","wxyz",};
+        for (auto let : digits) {
+            //cout << let << "\n";
+
+            int val = (let - '0') - 2;
+            groups_letters.push_back(lets_in_nums[val]);
+        }  
+
+        vector<string> results;
+        //cout << "boom"; 
+        perms("", groups_letters, results);
+
+        return results;
+
+
+            
+        
         
     }
-}
 
-int main() {
-    string digits = "23"; // Not needed
-    
-    vector<string> lets_in_nums = {"abc","def","ghi","jkl","mno","pqr","stu","wxyz",};
-    for (auto let : digits) {
-        //cout << let << "\n";
+private: 
+    void perms(string prev_letters, vector<string> group_letters_left, vector<string> &results) {
+        if (group_letters_left.empty()) {
+            results.push_back(prev_letters);
+            return;
+        }
 
-        int val = atoi(&let) - 2;
-        cout << lets_in_nums[val] << "\n";
+        for (auto let : group_letters_left[0]) {
+            string next = prev_letters + let;
+            if (group_letters_left.size() != 1) perms(next, vector<string>(group_letters_left.begin() + 1, group_letters_left.end()), results);
+
+            else perms(next, {}, results);
+
+        }
+
+        return;
         
-        
-
     }
-    
-} 
+};
